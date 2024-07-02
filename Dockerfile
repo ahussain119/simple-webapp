@@ -6,7 +6,7 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # Stage 2: Create a minimal image with the built application
-FROM openjdk:11-jre-slim
+FROM tomcat:9.0.64-jdk11-openjdk-slim
 WORKDIR /app
 COPY --from=build /app/target/simple-webapp-1.0-SNAPSHOT.war /app/simple-webapp.war
 EXPOSE 8080
