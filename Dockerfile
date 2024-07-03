@@ -7,17 +7,19 @@ COPY src ./src
 
 RUN mvn clean package -DskipTests
 
+RUN mv /app/target/*.war /app/target/ROOT.war
 
-FROM tomcat:9.0.64-jdk11-openjdk-slim
+
+FROM tomcat:latest
 
 WORKDIR /app
+
+RUN rm -rf ROOT
 
 COPY --from=build /app/target/*.war /app/
 
 EXPOSE 8080
 
-RUN chown -R tomcat:tomcat /app
-
 RUN rm -rf ROOT
 
-ENTRYPOINT ["java", "-jar", "/app/*.war"]
+CMD ["catalina.sh", "run"]
