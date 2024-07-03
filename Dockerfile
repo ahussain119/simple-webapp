@@ -14,7 +14,7 @@ FROM tomcat:latest
 
 WORKDIR /app
 
-RUN rm -rf /usr/local/tomcat/webapp/ROOT
+RUN rm -rf /usr/local/tomcat/webapps/ROOT
 
 COPY --from=build /app/target/*.war /usr/local/tomcat/webapps/
 
