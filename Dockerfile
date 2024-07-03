@@ -20,6 +20,4 @@ COPY --from=build /app/target/*.war /app/
 
 EXPOSE 8080
 
-RUN rm -rf ROOT
-
 CMD ["catalina.sh", "run"]
