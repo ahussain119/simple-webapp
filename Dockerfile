@@ -16,7 +16,7 @@ WORKDIR /app
 
 RUN rm -rf /usr/local/tomcat/webapp/ROOT
 
-COPY --from=build /app/target/*.war /usr/local/tomcat/webapp/
+COPY --from=build /app/target/*.war /usr/local/tomcat/webapps/
 
 EXPOSE 8080
 
