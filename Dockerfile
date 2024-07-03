@@ -10,4 +10,6 @@ FROM tomcat:9.0.64-jdk11-openjdk-slim
 WORKDIR /app
 COPY --from=build /app/target/simple-webapp-1.0-SNAPSHOT.war /app/simple-webapp.war
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "/app/simple-webapp.war"]
+RUN /app/simple-webapp.war ROOT.war
+RUN rm -rf ROOT
+ENTRYPOINT ["java", "-war", "/app/simple-webapp.war"]
