@@ -19,7 +19,7 @@ spec:
             - containerPort: 8080  # Port that your Tomcat application listens on
           resources:
             limits:
-              memory: "512Mi"  # Adjust resource limits as per your application requirements
+              memory: "2Gi"  # Adjust resource limits as per your application requirements
               cpu: "500m"
 ---
 apiVersion: v1
