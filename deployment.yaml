@@ -2,11 +2,14 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: tomcat-deployment
+  labels:
+    app: tomcat
 spec:
-  replicas: 1  # Adjust the number of replicas as per your requirements
+  replicas: 2  # Adjust the number of replicas as per your requirements
   selector:
     matchLabels:
       app: tomcat
+  replicas: 2
   template:
     metadata:
       labels:
@@ -17,20 +20,17 @@ spec:
           image: ahussain900/simple-webapp:latest  # Replace with your Docker image URL
           ports:
             - containerPort: 8080  # Port that your Tomcat application listens on
-          resources:
-            limits:
-              memory: "2Gi"  # Adjust resource limits as per your application requirements
-              cpu: "500m"
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: tomcat-service
 spec:
+  type: LoadBalancer
   selector:
     app: tomcat
   ports:
-    - protocol: TCP
+    - name: http 
+      protocol: TCP
       port: 8080  # External port to access the service
       targetPort: 8080  # Port that the service forwards to on the pods
-  type: NodePort  # Expose the service on a random NodePort
