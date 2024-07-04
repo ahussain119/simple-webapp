@@ -26,11 +26,11 @@ kind: Service
 metadata:
   name: tomcat-service
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: tomcat
   ports:
-    - name: http 
-      protocol: TCP
-      port: 80  # External port to access the service
-      targetPort: 8080  # Port that the service forwards to on the pods
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+      nodePort: 30080
